@@ -114,19 +114,10 @@ class ShapeDetectionNode(Node):
             output, circle_info = self.draw_circles_on_frame(blur_frame, blue_on_black, red_on_black, yellow_on_black)
             
             # Determine if shapes are detected
-            has_shape = False
-            if ((blue_on_black is not None and len(blue_on_black) > 0) or 
-                (red_on_black is not None and len(red_on_black) > 0) or 
-                (yellow_on_black is not None and len(yellow_on_black) > 0) or
-                (circle_info is not None and circle_info.shape_id != -1)):
-                has_shape = True
-            
-            # Update shape detection status
-            self.has_shape = has_shape
             
             # Save output image if shapes are detected and enough time has passed (rate limiting)
             current_time = time.time()
-            if has_shape and (current_time - self.last_capture_time) >= (1.0 / self.capture_rate):
+            if (current_time - self.last_capture_time) >= (1.0 / self.capture_rate):
                 self.save_output_image(output)
                 self.last_capture_time = current_time
             
