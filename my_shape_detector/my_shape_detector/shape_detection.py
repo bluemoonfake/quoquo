@@ -631,7 +631,7 @@ class ShapeDetectionNode(Node):
         return output,shape_info
 
 
-    def anisotropic_diffusion(self, img, num_iter=3, kappa=30, gamma=0.1):
+    def anisotropic_diffusion(self, img, num_iter=7, kappa=30, gamma=0.1):
         """
         Hàm thực hiện Anisotropic Diffusion trên hình ảnh.
         """
